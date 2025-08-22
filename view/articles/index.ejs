@@ -7,34 +7,69 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <title>Blog Website</title>
+    <style>
+        body {
+            background-color: #f0f8ff; /* Light blue background */
+        }
+        h1 {
+            color: #2c3e50; /* Darker blue */
+            text-align: center;
+            margin-top: 20px;
+        }
+        .card {
+            background-color: #fff3e0; /* Light orange card */
+            border-left: 5px solid #ff7043; /* Orange border */
+        }
+        .card-title {
+            color: #d84315; /* Dark orange title */
+        }
+        .card-subtitle {
+            color: #6c757d; /* Muted subtitle */
+        }
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+        .btn-info {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+    </style>
 </head>
 
 <body>
     <div class="container">
-        <h1 class="mb-4"> Bharat Intern Blog Website</h1>
-        <a href="/articles/new" class="btn btn-success">Create Article</a>
+        <h1>My Blog Website</h1>
+        <div class="text-center my-3">
+            <a href="/articles/new" class="btn btn-success">Create Article</a>
+        </div>
 
-        <% articles.forEach(article=>{%>
-            <div class="card mt-4">
+        <% articles.forEach(article => { %>
+            <div class="card mt-4 shadow-sm">
                 <div class="card-body">
-                    <h4 class="card-title">
-                        <%=article.title%>
-                    </h4>
-                    <div class="card-subtitle text-muted mb-2">
-                        <%=article.createdAt.toLocaleDateString() %>
+                    <h4 class="card-title"><%= article.title %></h4>
+                    <div class="card-subtitle mb-2">
+                        <%= article.createdAt.toLocaleDateString() %>
                     </div>
-                    <div class="card-text mb-2">
-                        <%=article.description%>
+                    <div class="card-text mb-3">
+                        <%= article.description %>
                     </div>
-                    <a href="articles/<%=article.slug%>" class="btn btn-primary">Read More</a>
-                    <a href="articles/edit/<%= article.id%>" class="btn btn-info">Edit</a>
-                    <form action="/articles/<%=article.id %>?_method=DELETE" method="POST" class="d-inline">
+                    <a href="articles/<%= article.slug %>" class="btn btn-primary me-2">Read More</a>
+                    <a href="articles/edit/<%= article.id %>" class="btn btn-info me-2">Edit</a>
+                    <form action="/articles/<%= article.id %>?_method=DELETE" method="POST" class="d-inline">
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
                 </div>
             </div>
-
-            <%})%>
+        <% }) %>
     </div>
 </body>
 
